@@ -5,6 +5,8 @@ on:
     branches: [main]
     tags: ["v*"]
   pull_request:
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -43,11 +45,16 @@ jobs:
           name: MemorySneak-v${{ env.VERSION }}
           path: MemorySneak-v*.zip
 
-      - name: Publish a release
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Attach the download to the release
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || github.ref_name }}
         run: |
-          gh release create "$GITHUB_REF_NAME" MemorySneak-v*.zip \
-            --title "Memory Sneak $VERSION" \
-            --generate-notes
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" MemorySneak-v*.zip --clobber
+          else
+            gh release create "$TAG" MemorySneak-v*.zip \
+              --title "Memory Sneak $VERSION" \
+              --generate-notes
+          fi
