@@ -20,6 +20,16 @@
 
 ---
 
+## Made for Macs with less memory
+
+Memory Sneak was made by someone running a **base-model Mac mini with an M6 chip and 16 GB of memory**, and it's built especially for Macs like that.
+
+On an 8 GB or 16 GB Mac, a few browser tabs, a creative app and a game running through Wine can use up everything you've got, fast. Then you get the "Your system has run out of application memory" window, usually at the worst possible moment. Memory Sneak is there to give you a heads-up *before* that happens, tell you which app to quit, and squeeze a little more out of your Mac while you game.
+
+If you've got plenty of memory, it'll still work great. But if you've ever looked at Activity Monitor and thought "why is it always yellow", this one's for you.
+
+---
+
 ## What it does
 
 Memory Sneak lives in your menu bar as a colored dot and a percentage, like `🟢 68%`. Click it to open a small panel with everything you need to know.
